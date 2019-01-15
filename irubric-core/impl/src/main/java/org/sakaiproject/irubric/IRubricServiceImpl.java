@@ -41,6 +41,9 @@ import java.util.Set;
 import org.sakaiproject.authz.api.SecurityService;
 import org.sakaiproject.util.ResourceLoader;
 
+// RS 2018-05-02 (Issue 571): import libary for locality conversion
+import java.text.NumberFormat;
+
 /**
  * iRubric bean - a class working with iRubric server
  * 
@@ -1278,6 +1281,9 @@ public class IRubricServiceImpl implements Serializable, IRubricService {
 
            if (length > 0) {
 
+				// RS 2018-05-02 (Issue 571): Get a localized number format
+				NumberFormat nbFormat = NumberFormat.getInstance(new ResourceLoader().getLocale());
+
                for (int i = 0; i < length; i++) {
 
                    //score(grade) when split
@@ -1291,7 +1297,15 @@ public class IRubricServiceImpl implements Serializable, IRubricService {
 
 					   //update grade if its new or its changed
 					   if (oldScore == null || !score.equals(oldScore)) {
-						   gradebookService.saveGradeAndCommentForStudent(gradebookUuid, gradebookItemId, studentUId, score, null);
+
+							//TH 2018-12-19 (Issue 571): Convert the score string to double
+							double gradeAsDouble = Double.parseDouble(score); 	
+
+							// RS 2018-05-02 (Issue 571): Convert the standard score format to locale
+							String localeScore = nbFormat.format(gradeAsDouble);
+
+						   // RS 2018-05-02 (Issue 571): pass the locale format to be saved as if user entered it in UI
+							gradebookService.saveGradeAndCommentForStudent(gradebookUuid, gradebookItemId, studentUId, localeScore, null);
 					   }
 		   }
                }
