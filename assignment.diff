@@ -1,0 +1,33 @@
+diff --git a/assignment/assignment-tool/tool/src/java/org/sakaiproject/assignment/tool/AssignmentAction.java b/assignment/assignment-tool/tool/src/java/org/sakaiproject/assignment/tool/AssignmentAction.java
+index a28cfcf..a108332 100644
+--- a/assignment/assignment-tool/tool/src/java/org/sakaiproject/assignment/tool/AssignmentAction.java
++++ b/assignment/assignment-tool/tool/src/java/org/sakaiproject/assignment/tool/AssignmentAction.java
+@@ -151,7 +151,6 @@ import org.sakaiproject.scoringservice.api.ScoringService;
+ import org.sakaiproject.service.gradebook.shared.AssignmentHasIllegalPointsException;
+ import org.sakaiproject.service.gradebook.shared.CategoryDefinition;
+ import org.sakaiproject.service.gradebook.shared.ConflictingAssignmentNameException;
+-import org.sakaiproject.service.gradebook.shared.ConflictingExternalIdException;
+ import org.sakaiproject.service.gradebook.shared.GradebookExternalAssessmentService;
+ import org.sakaiproject.service.gradebook.shared.GradebookNotFoundException;
+ import org.sakaiproject.service.gradebook.shared.GradebookService;
+@@ -17778,7 +17777,7 @@ public class AssignmentAction extends PagedResourceActionII
+ 					// Determine if a scoring component (like a rubric) has been associated with this gradebook item
+ 					ScoringComponent component = scoringService.getScoringComponent(
+ 							scoringAgent.getAgentId(), gradebookUid, gbItemId);
+-					boolean scoringComponentEnabled = component != null;
++					boolean scoringComponentEnabled = component != null && !assignment.isGroup();
+ 					
+ 					context.put("scoringComponentEnabled", scoringComponentEnabled);
+ 					
+diff --git a/reference/library/src/morpheus-master/sass/base/_icons.scss b/reference/library/src/morpheus-master/sass/base/_icons.scss
+index 10833c3..ff4157e 100644
+--- a/reference/library/src/morpheus-master/sass/base/_icons.scss
++++ b/reference/library/src/morpheus-master/sass/base/_icons.scss
+@@ -81,6 +81,7 @@
+   .icon-sakai--kaltura-my-media {                           @extend .fa-file-video-o; }
+   .icon-sakai--sakai-bbb {                                  @extend .fa-video-camera; }
+   .icon-sakai--sakai-rsf-evaluation {                       @extend .fa-commenting; }
++  .icon-sakai--sakai-irubric {                              @extend .fa-table; }
+ 
+   // other icons
+   .icon-sakai--check {                                      @extend .fa-check; }
