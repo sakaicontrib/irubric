@@ -42,7 +42,6 @@ import org.sakaiproject.tool.api.SessionManager;
 import org.sakaiproject.tool.api.ToolManager;
 import org.sakaiproject.tool.gradebook.facades.Authn;
 import org.sakaiproject.tool.gradebook.facades.Authz;
-import org.sakaiproject.tool.gradebook.facades.ContextManagement;
 import org.sakaiproject.util.ResourceLoader;
 
 /**
@@ -85,7 +84,6 @@ public class IRubricServlet extends HttpServlet {
 	private IRubricService iRubricService;
 	private Authz authzService;
 	private Authn authnService;
-    private ContextManagement contextMgm;
     private SessionManager sessionManager;
     private SecurityService securityService;
     private SiteService siteService;
@@ -106,7 +104,6 @@ public class IRubricServlet extends HttpServlet {
 		iRubricService = (IRubricService) ComponentManager.get(IRUBRIC_SERVICE);
 		authzService = (Authz) ComponentManager.get("org_sakaiproject_tool_gradebook_facades_Authz");
 		authnService = (Authn) ComponentManager.get("org_sakaiproject_tool_gradebook_facades_Authn");
-        contextMgm = (ContextManagement) ComponentManager.get("org_sakaiproject_tool_gradebook_facades_ContextManagement");
 		sessionManager = (SessionManager) ComponentManager.get("org.sakaiproject.tool.api.SessionManager");
         toolManager = (ToolManager) ComponentManager.get("org.sakaiproject.tool.api.ToolManage");
         securityService = (SecurityService) ComponentManager.get("org.sakaiproject.authz.api.SecurityService");
@@ -172,7 +169,7 @@ public class IRubricServlet extends HttpServlet {
         if (!cmd.equals(CMD_GET_ATTACHED_RUBRIC)) {         
             if (gradebookUid == null) {
                 authnService.setAuthnContext(request);
-                gradebookUid = contextMgm.getGradebookUid(request);
+                gradebookUid = siteId != null ? siteId : getCurrentSiteId();
             }
 
             String rosterStudentId = request.getParameter("rosterStudentId");
