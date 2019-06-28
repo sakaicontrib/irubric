@@ -78,7 +78,7 @@
 		$!tlang.getString("irub_action.description") 
 	</div>
 
-	<table class="listHier lines nolines">
+	<table class="table table-striped">
 		<tr>
 		    <!--set link sort by title -->
 			#set ($baseURL=$sakai_ActionURL.reset().setParameter("sakai_action", "doSort").setQueryString('criteria=title').toString())
