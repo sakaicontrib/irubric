@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+    default-lazy-init="false">
 
-<beans default-lazy-init="false">
     <bean id="org.sakaiproject.irubric.IRubricScoringAgent" class="org.sakaiproject.irubric.IRubricScoringAgent"
           init-method="init">
         <property name="scoringService" ref="org.sakaiproject.scoringservice.api.ScoringService"/>
@@ -19,7 +21,7 @@
    		<property name="siteService" ref="org.sakaiproject.site.api.SiteService" />
    		<property name="courseManagementService" ref="org.sakaiproject.coursemanagement.api.CourseManagementService" />
    		<property name="toolManager" ref="org.sakaiproject.tool.api.ToolManager" />
-
+   		<property name="securityService" ref="org.sakaiproject.authz.api.SecurityService" />
    		<property name="gradebookService" ref="org_sakaiproject_service_gradebook_GradebookService" />
 
    		<property name="serverConfigurationService" ref="org.sakaiproject.component.api.ServerConfigurationService" />
