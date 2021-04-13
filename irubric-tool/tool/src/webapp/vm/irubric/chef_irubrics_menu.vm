@@ -31,14 +31,12 @@
 	</li>
 	#end
 
-	<!--allow my rubrics -->
+    <!--allow my rubrics -->
 	#if($isAllowMyRubrics)
 	<li role="menuitem">
 		#if(!$!view.equals("myr"))
-			<!--set link my rubric-->
-			#set ($baseURL=$sakai_ActionURL.reset().setParameter("sakai_action", "doMyrubric").toString())
 			<span>
-				<a href="$baseURL" title="$!tlang.getString('irub_myrub')">
+				<a href="javascript:void(0);" title="$!tlang.getString('irub_myrub')" onclick="openWindowiRubric('myr')">
 					$!tlang.getString("irub_myrub")
 				</a>
 			</span>
@@ -52,10 +50,8 @@
 	#if($isAllowAccessGallery)
 		<li role="menuitem" >
 			#if(!$!view.equals("gly"))
-				<!--set link gallery -->
-				#set ($baseURL=$sakai_ActionURL.reset().setParameter("sakai_action", "doGallery").toString())
 				<span >
-					<a href="$baseURL" title="$!tlang.getString('irub_gly')">
+					<a href="javascript:void(0);" title="$!tlang.getString('irub_gly')" onclick="openWindowiRubric('gly')">
 						$!tlang.getString("irub_gly")
 					</a>
 				</span>
@@ -69,10 +65,8 @@
 	#if($isAllowBuild)
 		<li role="menuitem">
 			#if(!$!view.equals("bld"))
-				<!--set link build rubric -->
-				#set ($baseURL=$sakai_ActionURL.reset().setParameter("sakai_action", "doBuild").toString())
 				<span>
-					<a href="$baseURL" title="$!tlang.getString('irub_build')">
+					<a href="javascript:void(0);" title="$!tlang.getString('irub_build')" onclick="openWindowiRubric('bld')">
 						$!tlang.getString("irub_build")
 					</a>
 				</span>
@@ -108,10 +102,8 @@
 	#if($!isAllowGrades)
 		<li role="menuitem">
 			#if(!$!view.equals("gradeall"))
-				<!--set link grade all -->
-				#set ($baseURL=$sakai_ActionURL.reset().setParameter("sakai_action", "doGradeAll").toString())
 				<span>
-					<a href="$baseURL" title="$tlang.getString('irub_grdall')">
+					<a href="javascript:void(0);" title="$tlang.getString('irub_grdall')" onclick="openWindowiRubric('gradeall')">
 						$!tlang.getString("irub_grdall")
 					</a>
 				</span>
