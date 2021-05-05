@@ -1,7 +1,9 @@
 /*Copyright (C) Reazon Systems, Inc.  All rights reserved.*/
 package org.sakaiproject.irubric;
 
-import org.apache.commons.lang.StringUtils;
+// TH 2021-05-05 (Issue 793): Removed dependency since it's not used by Sakai anymore
+//import org.apache.commons.lang.StringUtils;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.sakaiproject.authz.api.Member;
@@ -1100,7 +1102,8 @@ public class IRubricServiceImpl implements Serializable, IRubricService {
             String xToken =  doiRubricAuthentication(dataPacket);
 
             // authenticate with iRubric system
-			if (StringUtils.isNotBlank(xToken)) {
+			//TH 2021-05-05: Replace StringUrils.isNotBlank since the lib is not used
+			if (!(xToken == null || xToken.trim().isEmpty())) {
 				// authenticating completed
                 String sGrade = getData( xToken );
 
@@ -1127,12 +1130,14 @@ public class IRubricServiceImpl implements Serializable, IRubricService {
                             break;
 
                         default:
-                            LOG.error("invalid data returned from Irubric system for gradebook: " + gradebookUid + " item: " + gradebookItemIdStr);
+							//TH 2021-05-05 (issue 793): Add error code
+							LOG.error("Error irubric-core-90451: Invalid data returned from Irubric system for gradebook: " + gradebookUid + " item: " + gradebookItemIdStr);
                             break;
                     }
 
                 } else {
-                    LOG.error("Couldn't receive data from Irubric system for gradebook: " + gradebookUid + " item: " + gradebookItemIdStr);
+					//TH 2021-05-05 (issue 793): Add error code
+					LOG.error("Error irubric-core-85362: Couldn't receive data from Irubric system for gradebook: " + gradebookUid + " item: " + gradebookItemIdStr);
                 }
 
             }

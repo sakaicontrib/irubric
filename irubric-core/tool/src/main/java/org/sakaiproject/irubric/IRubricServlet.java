@@ -28,7 +28,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
+// TH 2021-05-05 (Issue 793): Removed dependency since it's not used by Sakai anymore
+//import org.apache.commons.lang.StringUtils;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.sakaiproject.authz.api.SecurityService;
@@ -232,7 +234,9 @@ public class IRubricServlet extends HttpServlet {
             try {
 
                 String xToken = iRubricService.doiRubricAuthentication(dataPacket);
-                if (StringUtils.isNotBlank(xToken)) {
+
+				//TH 2021-05-05: Replace StringUrils.isNotBlank since the lib is not used
+				if (!(xToken == null || xToken.trim().isEmpty())) {
                     switch (xToken.charAt(0)) {
                         case 'T':
                             //Gradebook currentGradebook = (Gradebook) iRubricService.getGradebookService().getGradebook(gradebookUid);
